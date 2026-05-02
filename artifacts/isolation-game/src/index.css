@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --font-sans: var(--app-font-sans);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 220 20% 97%;
+  --foreground: 220 25% 15%;
+  --border: 220 15% 88%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 25% 15%;
+  --primary: 217 91% 60%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 220 15% 93%;
+  --muted-foreground: 220 12% 52%;
+
+  --app-font-sans: 'Inter', 'system-ui', sans-serif;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    min-height: 100vh;
+    font-feature-settings: "cv11", "ss01";
+  }
+}
+
+@keyframes fadeBlockIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+    background-color: #ffffff;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    background-color: #9ca3af;
+  }
+}
+
+@keyframes pieceBounce {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+}
+
+@keyframes validPulse {
+  0%, 100% { opacity: 0.7; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes statusFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes winCelebrate {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.05) rotate(-1deg); }
+  50% { transform: scale(1.05) rotate(1deg); }
+  75% { transform: scale(1.05) rotate(-0.5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes thinkDot {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+.cell-block-animate {
+  animation: fadeBlockIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.piece-enter {
+  animation: pieceBounce 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.valid-move-pulse {
+  animation: validPulse 1.2s ease-in-out infinite;
+}
+
+.status-animate {
+  animation: statusFadeIn 0.3s ease-out forwards;
+}
+
+.win-animate {
+  animation: winCelebrate 0.6s ease-in-out;
+}
+
+.think-dot {
+  display: inline-block;
+  animation: thinkDot 1.4s ease-in-out infinite;
+}
+
+.think-dot:nth-child(2) { animation-delay: 0.2s; }
+.think-dot:nth-child(3) { animation-delay: 0.4s; }
